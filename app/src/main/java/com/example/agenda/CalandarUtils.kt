@@ -1,8 +1,6 @@
 package com.example.agenda
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.LocalTime
@@ -37,19 +35,19 @@ object CalendarUtils {
         return date?.format(formatter)
     }
 
-    fun daysInMonthArray(): ArrayList<LocalDate> {
-        val daysInMonthArray = ArrayList<LocalDate>()
+    fun daysInMonthArray(selectedDate: LocalDate?): ArrayList<LocalDate?> {
+        val daysInMonthArray = ArrayList<LocalDate?>()
 
-        val yearMonth = YearMonth.from(selectedDate)
+        val yearMonth = YearMonth.from(this.selectedDate)
         val daysInMonth = yearMonth.lengthOfMonth()
 
-        val prevMonth = selectedDate!!.minusMonths(1)
-        val nextMonth = selectedDate!!.plusMonths(1)
+        val prevMonth = this.selectedDate!!.minusMonths(1)
+        val nextMonth = this.selectedDate!!.plusMonths(1)
 
         val prevYearMonth = YearMonth.from(prevMonth)
         val prevDaysInMonth = prevYearMonth.lengthOfMonth()
 
-        val firstOfMonth = selectedDate!!.withDayOfMonth(1)
+        val firstOfMonth = this.selectedDate!!.withDayOfMonth(1)
         val dayOfWeek = firstOfMonth.dayOfWeek.value
 
         for (i in 1..42) {
@@ -70,8 +68,8 @@ object CalendarUtils {
                 )
                 else -> daysInMonthArray.add(
                     LocalDate.of(
-                        selectedDate!!.year,
-                        selectedDate!!.month,
+                        this.selectedDate!!.year,
+                        this.selectedDate!!.month,
                         i - dayOfWeek
                     )
                 )
