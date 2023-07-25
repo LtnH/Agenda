@@ -1,6 +1,7 @@
 package com.example.agenda
 
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -48,8 +49,13 @@ object CalendarUtils {
         val days = ArrayList<LocalDate?>()
         var current = sundayForDate(selectedDate)
         val endDate = current?.plusWeeks(1)
+        Log.d("test", endDate.toString())
+        Log.d("test", current.toString())
+        Log.d("test", current?.isBefore(endDate).toString())
+        Log.d("test", days.toString())
 
         while (current?.isBefore(endDate) == true) {
+            Log.d("test", "pourquoi tu passe connard")
             days.add(current)
             current = current.plusDays(1)
         }
@@ -59,10 +65,13 @@ object CalendarUtils {
     private fun sundayForDate(current: LocalDate?): LocalDate? {
         var oneWeekAgo = current?.minusWeeks(1)
         var newCurrent = current
+        Log.d("test2", newCurrent.toString())
+        Log.d("test2", current.toString())
+        Log.d("test2", oneWeekAgo.toString())
 
         while (newCurrent?.isAfter(oneWeekAgo) == true) {
             if (newCurrent.dayOfWeek == DayOfWeek.SUNDAY) {
-                return current
+                return newCurrent
             }
             newCurrent = newCurrent.minusDays(1)
         }

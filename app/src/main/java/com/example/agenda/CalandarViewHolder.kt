@@ -1,5 +1,6 @@
 package com.example.agenda
 
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -15,6 +16,7 @@ class CalendarViewHolder(itemView: View, private val onItemListener: CalendarAda
     }
 
     override fun onClick(view: View) {
-        onItemListener.onItemClick(adapterPosition, days[adapterPosition])
+        Log.v("test", bindingAdapterPosition.toString())
+        onItemListener.onItemClick(bindingAdapterPosition, days[bindingAdapterPosition])
     }
 }

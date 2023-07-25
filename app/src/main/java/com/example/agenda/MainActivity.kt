@@ -1,11 +1,9 @@
 package com.example.agenda
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -54,6 +52,9 @@ class MainActivity : AppCompatActivity(), CalendarAdapter.OnItemListener {
         if (date != null) {
             CalendarUtils.selectedDate = date
             setMonthView()
+        }
+        if (date == CalendarUtils.selectedDate) {
+            startActivity(Intent(this, WeekViewActivity::class.java))
         }
     }
 

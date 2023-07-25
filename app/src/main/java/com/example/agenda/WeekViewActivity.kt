@@ -2,6 +2,7 @@ package com.example.agenda
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ListView
 import android.widget.TextView
@@ -11,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.agenda.CalendarUtils.daysInWeekArray
 import com.example.agenda.CalendarUtils.monthYearFromDate
 import java.time.LocalDate
-import java.util.ArrayList
 
 class WeekViewActivity : AppCompatActivity(), CalendarAdapter.OnItemListener {
     private lateinit var monthYearText: TextView
@@ -34,6 +34,7 @@ class WeekViewActivity : AppCompatActivity(), CalendarAdapter.OnItemListener {
     private fun setWeekView() {
         monthYearText.text = monthYearFromDate(CalendarUtils.selectedDate)
         val days = daysInWeekArray(CalendarUtils.selectedDate)
+        Log.d("test", days.toString())
 
         val calendarAdapter = CalendarAdapter(days, this)
         val layoutManager = GridLayoutManager(applicationContext, 7)
@@ -53,6 +54,7 @@ class WeekViewActivity : AppCompatActivity(), CalendarAdapter.OnItemListener {
     }
 
     override fun onItemClick(position: Int, date: LocalDate?) {
+        Log.d("TAG", date.toString())
         CalendarUtils.selectedDate = date
         setWeekView()
     }
