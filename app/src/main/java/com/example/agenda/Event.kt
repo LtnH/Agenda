@@ -19,6 +19,20 @@ class Event(private var name: String, private var date: LocalDate?, private var 
 
             return events
         }
+
+        fun eventsForDateAndTime(date: LocalDate?, time: LocalTime): ArrayList<Event> {
+            val events = ArrayList<Event>()
+
+            for (event in eventsList) {
+                val eventHour = event.time?.hour
+                val cellHour = time.hour
+                if (event.date == date && eventHour == cellHour) {
+                    events.add(event)
+                }
+            }
+
+            return events
+        }
     }
 
     fun getName(): String {

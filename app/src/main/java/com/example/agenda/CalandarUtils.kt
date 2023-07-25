@@ -12,6 +12,15 @@ import java.util.ArrayList
 
 object CalendarUtils {
     var selectedDate: LocalDate? = null
+    fun formattedShortTime(time: LocalTime?): String? {
+        val formatter = DateTimeFormatter.ofPattern("HH:mm")
+        return time?.format(formatter)
+    }
+
+    fun monthDayFromDate(date: LocalDate?): String? {
+        val formatter = DateTimeFormatter.ofPattern("MMMM d")
+        return date?.format(formatter)
+    }
 
     fun formattedDate(date: LocalDate?): String? {
         val formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy")
@@ -28,18 +37,44 @@ object CalendarUtils {
         return date?.format(formatter)
     }
 
-    fun daysInMonthArray(date: LocalDate?): ArrayList<LocalDate?> {
-        val daysInMonthArray = ArrayList<LocalDate?>()
-        val yearMonth = YearMonth.from(date)
+    fun daysInMonthArray(): ArrayList<LocalDate> {
+        val daysInMonthArray = ArrayList<LocalDate>()
+
+        val yearMonth = YearMonth.from(selectedDate)
         val daysInMonth = yearMonth.lengthOfMonth()
+
+        val prevMonth = selectedDate!!.minusMonths(1)
+        val nextMonth = selectedDate!!.plusMonths(1)
+
+        val prevYearMonth = YearMonth.from(prevMonth)
+        val prevDaysInMonth = prevYearMonth.lengthOfMonth()
+
         val firstOfMonth = selectedDate!!.withDayOfMonth(1)
         val dayOfWeek = firstOfMonth.dayOfWeek.value
 
         for (i in 1..42) {
-            if (i <= dayOfWeek || i > daysInMonth + dayOfWeek) {
-                daysInMonthArray.add(null)
-            } else {
-                daysInMonthArray.add(LocalDate.of(selectedDate!!.year, selectedDate!!.month, i - dayOfWeek))
+            when {
+                i <= dayOfWeek -> daysInMonthArray.add(
+                    LocalDate.of(
+                        prevMonth.year,
+                        prevMonth.month,
+                        prevDaysInMonth + i - dayOfWeek
+                    )
+                )
+                i > daysInMonth + dayOfWeek -> daysInMonthArray.add(
+                    LocalDate.of(
+                        nextMonth.year,
+                        nextMonth.month,
+                        i - dayOfWeek - daysInMonth
+                    )
+                )
+                else -> daysInMonthArray.add(
+                    LocalDate.of(
+                        selectedDate!!.year,
+                        selectedDate!!.month,
+                        i - dayOfWeek
+                    )
+                )
             }
         }
         return daysInMonthArray
