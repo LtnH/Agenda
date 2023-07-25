@@ -12,24 +12,22 @@ import java.util.ArrayList
 object CalendarUtils {
     var selectedDate: LocalDate? = null
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun formattedDate(date: LocalDate): String {
+    fun formattedDate(date: LocalDate?): String? {
         val formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy")
-        return date.format(formatter)
+        return date?.format(formatter)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun formattedTime(time: LocalTime): String {
+    fun formattedTime(time: LocalTime?): String? {
         val formatter = DateTimeFormatter.ofPattern("hh:mm:ss a")
-        return time.format(formatter)
+        return time?.format(formatter)
     }
 
-    fun monthYearFromDate(date: LocalDate): String {
+    fun monthYearFromDate(date: LocalDate?): String? {
         val formatter = DateTimeFormatter.ofPattern("MMMM yyyy")
-        return date.format(formatter)
+        return date?.format(formatter)
     }
 
-    fun daysInMonthArray(date: LocalDate): ArrayList<LocalDate?> {
+    fun daysInMonthArray(date: LocalDate?): ArrayList<LocalDate?> {
         val daysInMonthArray = ArrayList<LocalDate?>()
         val yearMonth = YearMonth.from(date)
         val daysInMonth = yearMonth.lengthOfMonth()
@@ -46,26 +44,27 @@ object CalendarUtils {
         return daysInMonthArray
     }
 
-    fun daysInWeekArray(selectedDate: LocalDate): ArrayList<LocalDate> {
-        val days = ArrayList<LocalDate>()
+    fun daysInWeekArray(selectedDate: LocalDate?): ArrayList<LocalDate?> {
+        val days = ArrayList<LocalDate?>()
         var current = sundayForDate(selectedDate)
-        val endDate = current.plusWeeks(1)
+        val endDate = current?.plusWeeks(1)
 
-        while (current.isBefore(endDate)) {
+        while (current?.isBefore(endDate) == true) {
             days.add(current)
             current = current.plusDays(1)
         }
         return days
     }
 
-    private fun sundayForDate(current: LocalDate): LocalDate? {
-        var oneWeekAgo = current.minusWeeks(1)
+    private fun sundayForDate(current: LocalDate?): LocalDate? {
+        var oneWeekAgo = current?.minusWeeks(1)
+        var newCurrent = current
 
-        while (current.isAfter(oneWeekAgo)) {
-            if (current.dayOfWeek == DayOfWeek.SUNDAY) {
+        while (newCurrent?.isAfter(oneWeekAgo) == true) {
+            if (newCurrent.dayOfWeek == DayOfWeek.SUNDAY) {
                 return current
             }
-            current = current.minusDays(1)
+            newCurrent = newCurrent.minusDays(1)
         }
         return null
     }

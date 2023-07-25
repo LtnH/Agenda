@@ -8,6 +8,8 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.agenda.CalendarUtils.daysInWeekArray
+import com.example.agenda.CalendarUtils.monthYearFromDate
 import java.time.LocalDate
 import java.util.ArrayList
 
@@ -41,16 +43,16 @@ class WeekViewActivity : AppCompatActivity(), CalendarAdapter.OnItemListener {
     }
 
     fun previousWeekAction(view: View) {
-        CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1)
+        CalendarUtils.selectedDate = CalendarUtils.selectedDate?.minusWeeks(1)
         setWeekView()
     }
 
     fun nextWeekAction(view: View) {
-        CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1)
+        CalendarUtils.selectedDate = CalendarUtils.selectedDate?.plusWeeks(1)
         setWeekView()
     }
 
-    override fun onItemClick(position: Int, date: LocalDate) {
+    override fun onItemClick(position: Int, date: LocalDate?) {
         CalendarUtils.selectedDate = date
         setWeekView()
     }

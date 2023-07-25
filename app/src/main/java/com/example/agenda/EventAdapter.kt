@@ -17,7 +17,7 @@ class EventAdapter(context: Context, events: List<Event>) : ArrayAdapter<Event>(
 
         val eventCellTV = convertViewVar!!.findViewById<TextView>(R.id.eventCellTV)
 
-        val eventTitle = "${event?.name} ${CalendarUtils.formattedTime(event?.time)}"
+        val eventTitle = "${event?.getName()} ${CalendarUtils.formattedTime(event?.getTime())}"
         eventCellTV.text = eventTitle
         return convertViewVar
     }

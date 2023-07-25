@@ -1,14 +1,15 @@
 package com.example.agenda
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import codewithcal.au.calendarappexample.CalendarUtils.daysInMonthArray
-import codewithcal.au.calendarappexample.CalendarUtils.monthYearFromDate
+import com.example.agenda.CalendarUtils.daysInMonthArray
 import com.example.agenda.CalendarUtils.monthYearFromDate
 import java.time.LocalDate
 
@@ -40,16 +41,16 @@ class MainActivity : AppCompatActivity(), CalendarAdapter.OnItemListener {
     }
 
     fun previousMonthAction(view: View) {
-        CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusMonths(1)
+        CalendarUtils.selectedDate = CalendarUtils.selectedDate?.minusMonths(1)
         setMonthView()
     }
 
     fun nextMonthAction(view: View) {
-        CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusMonths(1)
+        CalendarUtils.selectedDate = CalendarUtils.selectedDate?.plusMonths(1)
         setMonthView()
     }
 
-    override fun onItemClick(position: Int, date: LocalDate) {
+    override fun onItemClick(position: Int, date: LocalDate?) {
         if (date != null) {
             CalendarUtils.selectedDate = date
             setMonthView()

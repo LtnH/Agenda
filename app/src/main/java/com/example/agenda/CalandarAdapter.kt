@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.time.LocalDate
 import java.util.ArrayList
 
-class CalendarAdapter(private val days: ArrayList<LocalDate>, private val onItemListener: OnItemListener) : RecyclerView.Adapter<CalendarViewHolder>() {
+class CalendarAdapter(private val days: ArrayList<LocalDate?>, private val onItemListener: OnItemListener) : RecyclerView.Adapter<CalendarViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -41,6 +41,6 @@ class CalendarAdapter(private val days: ArrayList<LocalDate>, private val onItem
     }
 
     interface OnItemListener {
-        fun onItemClick(position: Int, date: LocalDate)
+        fun onItemClick(position: Int, date: LocalDate?)
     }
 }
