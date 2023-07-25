@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity(), CalendarAdapter.OnItemListener {
 
     private fun setMonthView() {
         monthYearText.text = monthYearFromDate(CalendarUtils.selectedDate)
-        val daysInMonth = daysInMonthArray(CalendarUtils.selectedDate)
+        val daysInMonth: ArrayList<LocalDate?> = daysInMonthArray()
 
         val calendarAdapter = CalendarAdapter(daysInMonth, this)
         val layoutManager = GridLayoutManager(applicationContext, 7)

@@ -10,15 +10,6 @@ import java.util.ArrayList
 
 object CalendarUtils {
     var selectedDate: LocalDate? = null
-    fun formattedShortTime(time: LocalTime?): String? {
-        val formatter = DateTimeFormatter.ofPattern("HH:mm")
-        return time?.format(formatter)
-    }
-
-    fun monthDayFromDate(date: LocalDate?): String? {
-        val formatter = DateTimeFormatter.ofPattern("MMMM d")
-        return date?.format(formatter)
-    }
 
     fun formattedDate(date: LocalDate?): String? {
         val formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy")
@@ -30,51 +21,64 @@ object CalendarUtils {
         return time?.format(formatter)
     }
 
+    fun formattedShortTime(time: LocalTime?): String? {
+        val formatter = DateTimeFormatter.ofPattern("HH:mm")
+        return time?.format(formatter)
+    }
+
     fun monthYearFromDate(date: LocalDate?): String? {
         val formatter = DateTimeFormatter.ofPattern("MMMM yyyy")
         return date?.format(formatter)
     }
 
-    fun daysInMonthArray(selectedDate: LocalDate?): ArrayList<LocalDate?> {
+    fun monthDayFromDate(date: LocalDate?): String? {
+        val formatter = DateTimeFormatter.ofPattern("MMMM d")
+        return date?.format(formatter)
+    }
+
+    fun daysInMonthArray(): ArrayList<LocalDate?> {
         val daysInMonthArray = ArrayList<LocalDate?>()
 
-        val yearMonth = YearMonth.from(this.selectedDate)
-        val daysInMonth = yearMonth.lengthOfMonth()
+        selectedDate?.let {
+            val yearMonth = YearMonth.from(it)
+            val daysInMonth = yearMonth.lengthOfMonth()
 
-        val prevMonth = this.selectedDate!!.minusMonths(1)
-        val nextMonth = this.selectedDate!!.plusMonths(1)
+            val prevMonth = it.minusMonths(1)
+            val nextMonth = it.plusMonths(1)
 
-        val prevYearMonth = YearMonth.from(prevMonth)
-        val prevDaysInMonth = prevYearMonth.lengthOfMonth()
+            val prevYearMonth = YearMonth.from(prevMonth)
+            val prevDaysInMonth = prevYearMonth.lengthOfMonth()
 
-        val firstOfMonth = this.selectedDate!!.withDayOfMonth(1)
-        val dayOfWeek = firstOfMonth.dayOfWeek.value
+            val firstOfMonth = it.withDayOfMonth(1)
+            val dayOfWeek = firstOfMonth.dayOfWeek.value
 
-        for (i in 1..42) {
-            when {
-                i <= dayOfWeek -> daysInMonthArray.add(
-                    LocalDate.of(
-                        prevMonth.year,
-                        prevMonth.month,
-                        prevDaysInMonth + i - dayOfWeek
+            for (i in 1..42) {
+                when {
+                    i <= dayOfWeek -> daysInMonthArray.add(
+                        LocalDate.of(
+                            prevMonth.year,
+                            prevMonth.monthValue,
+                            prevDaysInMonth + i - dayOfWeek
+                        )
                     )
-                )
-                i > daysInMonth + dayOfWeek -> daysInMonthArray.add(
-                    LocalDate.of(
-                        nextMonth.year,
-                        nextMonth.month,
-                        i - dayOfWeek - daysInMonth
+                    i > daysInMonth + dayOfWeek -> daysInMonthArray.add(
+                        LocalDate.of(
+                            nextMonth.year,
+                            nextMonth.monthValue,
+                            i - dayOfWeek - daysInMonth
+                        )
                     )
-                )
-                else -> daysInMonthArray.add(
-                    LocalDate.of(
-                        this.selectedDate!!.year,
-                        this.selectedDate!!.month,
-                        i - dayOfWeek
+                    else -> daysInMonthArray.add(
+                        LocalDate.of(
+                            it.year,
+                            it.monthValue,
+                            i - dayOfWeek
+                        )
                     )
-                )
+                }
             }
         }
+
         return daysInMonthArray
     }
 
@@ -82,13 +86,8 @@ object CalendarUtils {
         val days = ArrayList<LocalDate?>()
         var current = sundayForDate(selectedDate)
         val endDate = current?.plusWeeks(1)
-        Log.d("test", endDate.toString())
-        Log.d("test", current.toString())
-        Log.d("test", current?.isBefore(endDate).toString())
-        Log.d("test", days.toString())
 
-        while (current?.isBefore(endDate) == true) {
-            Log.d("test", "pourquoi tu passe connard")
+        while (current != null && current.isBefore(endDate)) {
             days.add(current)
             current = current.plusDays(1)
         }
@@ -98,10 +97,6 @@ object CalendarUtils {
     private fun sundayForDate(current: LocalDate?): LocalDate? {
         var oneWeekAgo = current?.minusWeeks(1)
         var newCurrent = current
-        Log.d("test2", newCurrent.toString())
-        Log.d("test2", current.toString())
-        Log.d("test2", oneWeekAgo.toString())
-
         while (newCurrent?.isAfter(oneWeekAgo) == true) {
             if (newCurrent.dayOfWeek == DayOfWeek.SUNDAY) {
                 return newCurrent
