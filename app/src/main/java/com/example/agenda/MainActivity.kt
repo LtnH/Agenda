@@ -43,6 +43,14 @@ class MainActivity : AppCompatActivity(), CalendarAdapter.OnItemListener {
         setMonthView()
     }
 
+    fun newEventAction(view: View) {
+        startActivity(Intent(this, EventEditActivity::class.java))
+    }
+
+    fun dailyAction(view: View) {
+        startActivity(Intent(this, DailyCalendarActivity::class.java))
+    }
+
     fun nextMonthAction(view: View) {
         CalendarUtils.selectedDate = CalendarUtils.selectedDate?.plusMonths(1)
         setMonthView()
