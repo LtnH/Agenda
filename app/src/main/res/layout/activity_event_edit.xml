@@ -36,6 +36,13 @@
         android:textSize="20sp"
         android:textAlignment="center"
         android:textColor="@color/black"/>
+    <DatePicker
+        android:id="@+id/eventDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:datePickerMode="spinner"
+        android:calendarViewShown="false"
+        />
 
     <TextView
         android:id="@+id/eventTimeTV"
@@ -48,6 +55,11 @@
         android:textAlignment="center"
         android:textColor="@color/black"/>
 
+    <TimePicker
+        android:id="@+id/eventTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:timePickerMode="spinner" />
     <Button
         android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
