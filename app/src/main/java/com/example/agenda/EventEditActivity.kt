@@ -1,6 +1,7 @@
 package com.example.agenda
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.DatePicker
 import android.widget.EditText
@@ -51,6 +52,7 @@ class EventEditActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(map: GoogleMap) {
+        Log.wtf("wtf", "eho")
         googleMap = map
         val location = LatLng(48.858844, 2.294351)
         googleMap.addMarker(MarkerOptions().position(location).title("Tour Eiffel"))

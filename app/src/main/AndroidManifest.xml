@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CalendarAppExample">
-        <activity android:name=".EventEditActivity"/>
+        <activity android:name=".EventEditActivity"
+                android:exported="true"/>
         <activity android:name=".WeekViewActivity" />
         <activity android:name=".MainActivity"
             android:exported="true">
@@ -24,7 +25,7 @@
             android:exported="true" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBFO8tsLh_IPVFmQCYj3aRojqcJ1Whmnkg." />
+            android:value="AIzaSyBFO8tsLh_IPVFmQCYj3aRojqcJ1Whmnkg"/>
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "538968868181-dtf5sq3sclrnb8si17m6su39rgnbnea5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.agenda",
+            "certificate_hash": "6a3836f127a3ddcdbbeb7f1a5c31c2aa6062b72d"
+          }
+        },
+        {
           "client_id": "538968868181-jt5kpbu4o3m1t1p93c212er16evom3hn.apps.googleusercontent.com",
           "client_type": 3
         }
