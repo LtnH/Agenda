@@ -60,4 +60,15 @@
         android:layout_gravity="center"
         android:textSize="20sp"/>
 
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:background="@color/black"
+        android:layout_height="200dp"
+        android:layout_marginTop="8dp"
+        android:enabled="true"
+        android:clickable="true"
+        android:focusable="true" />
+
 </LinearLayout>
+

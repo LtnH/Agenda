@@ -22,9 +22,9 @@
         <activity
             android:name=".DailyCalendarActivity"
             android:exported="true" />
-        <queries>
-            <provider android:authorities="com.google.android.gms.location.places" />
-        </queries>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBFO8tsLh_IPVFmQCYj3aRojqcJ1Whmnkg." />
     </application>
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

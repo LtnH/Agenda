@@ -11,6 +11,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 class EventDetailsActivity : AppCompatActivity() {
 
     private lateinit var mapView: MapView
+    private val latitude = 48.858844
+    private val longitude = 2.294351
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
