@@ -1,23 +1,24 @@
 package com.example.agenda
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
+import android.os.Looper
 import android.view.View
 import android.widget.DatePicker
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.TimePicker
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
-import java.time.LocalDate
-import com.google.android.gms.maps.MapView
-import java.time.LocalTime
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-
+import java.time.LocalDate
+import java.time.LocalTime
 
 class EventEditActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -26,15 +27,19 @@ class EventEditActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var eventTime: TimePicker
     private lateinit var mapView: SupportMapFragment
     private lateinit var googleMap: GoogleMap
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var currentLocation: LatLng? = null
 
-    private lateinit var eventDetailActivity: EventDetailsActivity
     private var time: LocalTime? = null
+
+    companion object {
+        const val REQUEST_LOCATION_PERMISSION = 1
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_event_edit)
 
-        eventDetailActivity = EventDetailsActivity()
         initWidgets()
         time = LocalTime.now()
         eventDate.updateDate(CalendarUtils.selectedDate!!.year, CalendarUtils.selectedDate!!.monthValue, CalendarUtils.selectedDate!!.dayOfMonth)
@@ -42,6 +47,34 @@ class EventEditActivity : AppCompatActivity(), OnMapReadyCallback {
             .findFragmentById(R.id.map_view) as SupportMapFragment
         mapView.getMapAsync(this)
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        val locationRequest = LocationRequest.create().apply {
+            interval = 10000
+            fastestInterval = 5000
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+
+        val locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                locationResult ?: return
+                if (locationResult.locations.isNotEmpty()) {
+                    val location = locationResult.lastLocation
+                    currentLocation = LatLng(location.latitude, location.longitude)
+                    if (googleMap != null) {
+                        updateMapLocation(currentLocation!!)
+                    }
+                    fusedLocationClient.removeLocationUpdates(this)  // Stop location updates after receiving first location.
+                }
+            }
+        }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION_PERMISSION)
+        } else {
+            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
+        }
     }
 
     private fun initWidgets() {
@@ -52,10 +85,15 @@ class EventEditActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
     override fun onMapReady(map: GoogleMap) {
-        Log.wtf("wtf", "eho")
         googleMap = map
-        val location = LatLng(48.858844, 2.294351)
-        googleMap.addMarker(MarkerOptions().position(location).title("Tour Eiffel"))
+        if (currentLocation != null) {
+            updateMapLocation(currentLocation!!)
+        }
+    }
+
+    private fun updateMapLocation(location: LatLng) {
+        googleMap.clear()  // clear previous markers
+        googleMap.addMarker(MarkerOptions().position(location).title("My Location"))
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f))
     }
 
