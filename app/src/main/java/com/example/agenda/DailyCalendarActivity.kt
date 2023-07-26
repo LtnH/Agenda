@@ -73,4 +73,15 @@ class DailyCalendarActivity : AppCompatActivity() {
     fun newEventAction(view: View) {
         startActivity(Intent(this, EventEditActivity::class.java))
     }
+    fun weeklyAction(view: View) {
+        startActivity(Intent(this, WeekViewActivity::class.java))
+    }
+
+    fun monthAction(view: View) {
+        startActivity(Intent(this, MainActivity::class.java))
+    }
+
+    fun dailyAction(view: View) {
+        startActivity(Intent(this, DailyCalendarActivity::class.java))
+    }
 }

@@ -74,4 +74,11 @@ class WeekViewActivity : AppCompatActivity(), CalendarAdapter.OnItemListener {
     fun dailyAction(view: View) {
         startActivity(Intent(this, DailyCalendarActivity::class.java))
     }
+    fun weeklyAction(view: View) {
+        startActivity(Intent(this, WeekViewActivity::class.java))
+    }
+
+    fun monthAction(view: View) {
+        startActivity(Intent(this, MainActivity::class.java))
+    }
 }
