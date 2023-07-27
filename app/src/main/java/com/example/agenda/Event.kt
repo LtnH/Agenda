@@ -9,7 +9,6 @@ class Event(private var name: String, private var date: LocalDate?, private var 
     companion object {
         val eventsList: ArrayList<Event> = ArrayList()
 
-        // Additional method to get events for a specific date
         fun eventsForDate(date: LocalDate?): ArrayList<Event> {
             val events = ArrayList<Event>()
 

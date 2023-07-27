@@ -1,6 +1,9 @@
 package com.example.agenda
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.LocusId
 import android.location.Geocoder
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +12,7 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import java.util.Locale
 
-class EventAdapter(context: Context, events: List<Event>) :
+class EventAdapter(private val activity: Activity, context: Context, events: List<Event>) :
     ArrayAdapter<Event>(context, 0, events) {
 
     private val geocoder = Geocoder(context, Locale.getDefault())
@@ -35,6 +38,15 @@ class EventAdapter(context: Context, events: List<Event>) :
 
         val eventTitle = "${event?.getName()} ${CalendarUtils.formattedTime(event?.getTime())}\n$addressText"
         eventCellTV?.text = eventTitle
+        eventCellTV?.setOnClickListener {
+            val intent = Intent(activity, EventViewActivity::class.java)
+            intent.putExtra("eventName", event?.getName())
+            intent.putExtra("eventDate", event?.getDate()?.toString())
+            intent.putExtra("eventTime", event?.getTime()?.toString())
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.putExtra("eventLocation", event?.getLoc())
+            context.startActivity(intent)
+        }
 
         return itemView!!
     }
