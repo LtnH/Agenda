@@ -14,9 +14,9 @@
     <string name="wednesday_message">MER</string>
     <string name="thursday_message">JEU</string>
     <string name="friday_message">VEN</string>
-    <string name="name_message">Nom de l\'événement</string>
-    <string name="date_message">Date</string>
-    <string name="time_message">Heure</string>
+    <string name="name_message">Nom de l\'événement :</string>
+    <string name="date_message">Date :</string>
+    <string name="time_message">Heure :</string>
     <string name="save_message">Sauvegarder</string>
     <string name="hour_message_ten">10:00</string>
     <string name="event_message">Evénement</string>
