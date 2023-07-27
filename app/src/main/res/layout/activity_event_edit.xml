@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:text="Name:"
+            android:text="@string/name_message"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="20sp" />
@@ -35,11 +35,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:text="Date"
+            android:text="@string/date_message"
+            android:textSize="20sp"
             android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
+            android:textColor="@color/black"/>
         <DatePicker
             android:id="@+id/eventDate"
             android:layout_width="match_parent"
@@ -53,10 +52,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:text="Time"
+            android:text="@string/time_message"
+            android:textSize="20sp"
             android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textColor="@color/black"/>
 
         <TimePicker
             android:id="@+id/eventTime"
@@ -75,11 +74,11 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/save_message"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@null"
             android:onClick="saveEventAction"
-            android:text="Save"
             android:textColor="@color/blue"
             android:textSize="20sp"
             android:textStyle="bold" />
