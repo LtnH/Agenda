@@ -2,8 +2,9 @@ package com.example.agenda
 
 import java.time.LocalDate
 import java.time.LocalTime
+import com.google.android.gms.maps.model.LatLng
 
-class Event(private var name: String, private var date: LocalDate?, private var time: LocalTime?) {
+class Event(private var name: String, private var date: LocalDate?, private var time: LocalTime?, private var Location: LatLng?) {
 
     companion object {
         val eventsList: ArrayList<Event> = ArrayList()
@@ -37,6 +38,12 @@ class Event(private var name: String, private var date: LocalDate?, private var 
 
     fun getName(): String {
         return name
+    }
+    fun setLoc(name: String) {
+        this.Location = Location
+    }
+    fun getLoc(): LatLng? {
+        return Location
     }
 
     fun setName(name: String) {
