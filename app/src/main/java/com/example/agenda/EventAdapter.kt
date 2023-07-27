@@ -33,7 +33,7 @@ class EventAdapter(context: Context, events: List<Event>) :
             }
         } ?: "Location not available"
 
-        val eventTitle = "${event?.getName()} ${CalendarUtils.formattedTime(event?.getTime())} $addressText"
+        val eventTitle = "${event?.getName()} ${CalendarUtils.formattedTime(event?.getTime())}\n$addressText"
         eventCellTV?.text = eventTitle
 
         return itemView!!
