@@ -2,6 +2,7 @@ package com.example.agenda
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.os.Bundle
 import android.os.Looper
 import android.view.View
@@ -42,7 +43,11 @@ class EventEditActivity : AppCompatActivity(), OnMapReadyCallback {
 
         initWidgets()
         time = LocalTime.now()
-        eventDate.updateDate(CalendarUtils.selectedDate!!.year, CalendarUtils.selectedDate!!.monthValue, CalendarUtils.selectedDate!!.dayOfMonth)
+        eventDate.updateDate(
+            CalendarUtils.selectedDate!!.year,
+            CalendarUtils.selectedDate!!.monthValue,
+            CalendarUtils.selectedDate!!.dayOfMonth
+        )
         mapView = supportFragmentManager
             .findFragmentById(R.id.map_view) as SupportMapFragment
         mapView.getMapAsync(this)
@@ -69,11 +74,26 @@ class EventEditActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION_PERMISSION)
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                REQUEST_LOCATION_PERMISSION
+            )
         } else {
-            fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
+            fusedLocationClient.requestLocationUpdates(
+                locationRequest,
+                locationCallback,
+                Looper.getMainLooper()
+            )
         }
     }
 
@@ -119,7 +139,10 @@ class EventEditActivity : AppCompatActivity(), OnMapReadyCallback {
 
     fun saveEventAction(view: View) {
         val eventName = eventNameET.text.toString()
-        val newEvent = Event(eventName, LocalDate.of(eventDate.year, eventDate.month, eventDate.dayOfMonth), LocalTime.of(eventTime.hour, eventTime.minute))
+        val newEvent = Event(
+            eventName, LocalDate.of(eventDate.year, eventDate.month, eventDate.dayOfMonth),
+            LocalTime.of(eventTime.hour, eventTime.minute), currentLocation!!
+        )
         Event.eventsList.add(newEvent)
         finish()
     }
