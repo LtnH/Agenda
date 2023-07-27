@@ -2,4 +2,27 @@
     <string name="app_name">Agenda</string>
     <string name="back"><![CDATA[<-]]></string>
     <string name="forward"><![CDATA[->]]></string>
+    <string name="week_message">Semaine</string>
+    <string name="day_message">Jour</string>
+    <string name="month_message">Mois</string>
+    <string name="plus_message">+</string>
+    <string name="template_date">Feb 2021</string>
+    <string name="sunday_message">DIM</string>
+    <string name="saturday_message">SAM</string>
+    <string name="monday_message">LUN</string>
+    <string name="tuesday_message">MAR</string>
+    <string name="wednesday_message">MER</string>
+    <string name="thursday_message">JEU</string>
+    <string name="friday_message">VEN</string>
+    <string name="name_message">Nom de l\'événement</string>
+    <string name="date_message">Date</string>
+    <string name="time_message">Heure</string>
+    <string name="save_message">Sauvegarder</string>
+    <string name="hour_message_ten">10:00</string>
+    <string name="event_message">Evénement</string>
+    <string name="event_message_one">Event 1</string>
+    <string name="event_message_two">Event 2</string>
+    <string name="event_message_three">Event 3</string>
+    <string name="one_message">1</string>
+
 </resources>

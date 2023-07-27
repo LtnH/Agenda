@@ -12,7 +12,7 @@
         android:id="@+id/timeTV"
         android:textSize="20sp"
         android:textColor="@color/black"
-        android:text="10:00"/>
+        android:text="@string/hour_message_ten"/>
 
     <LinearLayout
         android:background="@color/lightGray"
@@ -31,7 +31,7 @@
             android:textSize="12sp"
             android:lines="2"
             android:textColor="@color/white"
-            android:text="Event 1"/>
+            android:text="@string/event_message"/>
 
         <TextView
             android:layout_width="0dp"
@@ -44,7 +44,7 @@
             android:textSize="12sp"
             android:lines="2"
             android:textColor="@color/white"
-            android:text="Event 2"/>
+            android:text="@string/event_message_two"/>
 
         <TextView
             android:layout_width="0dp"
@@ -57,7 +57,7 @@
             android:textSize="12sp"
             android:lines="2"
             android:textColor="@color/white"
-            android:text="Event 3"/>
+            android:text="@string/event_message_three"/>
 
     </LinearLayout>
 
