@@ -1,6 +1,7 @@
 package com.example.agenda
 
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,9 +19,9 @@ class CalendarAdapter(private val days: ArrayList<LocalDate?>, private val onIte
         // Set layout params for the view
         val layoutParams = view.layoutParams
         if (days.size > 15) { // month view
-            layoutParams.height = (parent.height * 0.166666666).toInt()
+            layoutParams.height = (parent.height * 0.1).toInt()
         } else { // week view
-            layoutParams.height = parent.height
+            layoutParams.height = (parent.height * 0.6).toInt()
         }
         view.layoutParams = layoutParams
 
@@ -33,13 +34,13 @@ class CalendarAdapter(private val days: ArrayList<LocalDate?>, private val onIte
         holder.dayOfMonth.text = date?.dayOfMonth.toString()
 
         if (date == CalendarUtils.selectedDate) {
-            holder.parentView.setBackgroundColor(Color.LTGRAY)
+            holder.parentView.setBackgroundResource(R.drawable.baground_cell_select)
         }
 
         if (date?.month == CalendarUtils.selectedDate?.month) {
             holder.dayOfMonth.setTextColor(Color.BLACK)
         } else {
-            holder.dayOfMonth.setTextColor(Color.LTGRAY)
+            holder.dayOfMonth.setTextColor(Color.GRAY)
         }
     }
 

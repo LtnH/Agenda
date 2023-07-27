@@ -1,6 +1,7 @@
 package com.example.agenda
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.DatePicker
 import android.widget.EditText
@@ -27,7 +28,7 @@ class EventEditActivity : AppCompatActivity() {
         eventDetailActivity = EventDetailsActivity()
         initWidgets()
         time = LocalTime.now()
-        eventDate.updateDate(CalendarUtils.selectedDate!!.year, CalendarUtils.selectedDate!!.monthValue, CalendarUtils.selectedDate!!.dayOfMonth)
+        eventDate.updateDate(CalendarUtils.selectedDate!!.year, CalendarUtils.selectedDate!!.monthValue - 1, CalendarUtils.selectedDate!!.dayOfMonth)
     }
 
     private fun initWidgets() {
@@ -40,7 +41,7 @@ class EventEditActivity : AppCompatActivity() {
 
     fun saveEventAction(view: View) {
         val eventName = eventNameET.text.toString()
-        val newEvent = Event(eventName, LocalDate.of(eventDate.year, eventDate.month, eventDate.dayOfMonth), LocalTime.of(eventTime.hour, eventTime.minute))
+        val newEvent = Event(eventName, LocalDate.of(eventDate.year, eventDate.month + 1, eventDate.dayOfMonth), LocalTime.of(eventTime.hour, eventTime.minute))
         Event.eventsList.add(newEvent)
         finish()
     }

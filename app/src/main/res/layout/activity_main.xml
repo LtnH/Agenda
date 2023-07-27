@@ -71,7 +71,7 @@
             android:layout_weight="2"
             android:text="Feb 2021"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="l"
             android:textSize="20sp" />
 
         <Button
@@ -98,7 +98,7 @@
             android:layout_weight="1"
             android:text="DIM"
             android:textAlignment="center"
-            android:textColor="@color/gray"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -107,7 +107,7 @@
             android:layout_weight="1"
             android:text="LUN"
             android:textAlignment="center"
-            android:textColor="@color/gray"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -116,7 +116,7 @@
             android:layout_weight="1"
             android:text="MAR"
             android:textAlignment="center"
-            android:textColor="@color/gray"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -125,7 +125,7 @@
             android:layout_weight="1"
             android:text="MER"
             android:textAlignment="center"
-            android:textColor="@color/gray"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -134,7 +134,7 @@
             android:layout_weight="1"
             android:text="JEU"
             android:textAlignment="center"
-            android:textColor="@color/gray"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -143,7 +143,7 @@
             android:layout_weight="1"
             android:text="VEN"
             android:textAlignment="center"
-            android:textColor="@color/gray"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
         <TextView
@@ -152,7 +152,7 @@
             android:layout_weight="1"
             android:text="SAM"
             android:textAlignment="center"
-            android:textColor="@color/gray"
+            android:textColor="@color/black"
             android:textSize="16sp" />
 
 
